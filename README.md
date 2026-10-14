@@ -1,4 +1,4 @@
-<img width="1280" height="682" alt="image" src="https://github.com/user-attachments/assets/2a895b16-9f1e-4444-a548-d027d3cd5488" /># Dự Án IAO202: MFA Bypass bằng Reverse Proxy - AiTM
+# Dự Án IAO202: MFA Bypass bằng Reverse Proxy - AiTM
 
 > **Chuyên ngành:** An Toàn Thông Tin 
 > **Project Timeline:** 19/10/2026 ➔ 30/10/2026  
