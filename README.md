@@ -1,25 +1,26 @@
-# Dự Án IAO: Vượt Qua Cơ Chế Xác Thực Đa Yếu Tố (MFA Bypass bằng Reverse Proxy - AiTM)
+<img width="1280" height="682" alt="image" src="https://github.com/user-attachments/assets/2a895b16-9f1e-4444-a548-d027d3cd5488" /># Dự Án IAO202: MFA Bypass bằng Reverse Proxy - AiTM
 
-> **Môn học / Chuyên đề:** An Toàn Thông Tin & Phòng Thủ Hệ Thống  
-> **Thời gian thực hiện (Sprint chính):** 19/10/2026 ➔ 30/10/2026  
+> **Chuyên ngành:** An Toàn Thông Tin 
+> **Project Timeline:** 19/10/2026 ➔ 30/10/2026  
 > **Nhóm thực hiện:** Lương An, Khanh, Hiếu, Quang  
 
 ---
 
-## 📖 1. Tổng Quan & Cơ Chế Kỹ Thuật Cốt Lõi
+## 📖 1. Tổng Quan và Cơ Chế Kỹ Thuật 
 
 ### Khác biệt bản chất giữa Phishing truyền thống và AiTM Reverse Proxy:
-* **Phishing truyền thống (Credential Harvesting):** Kẻ tấn công tạo một trang web tĩnh giả mạo giao diện để lừa nạn nhân nhập username và password. **Hạn chế:** Khi hệ thống bật MFA (mã OTP hoặc xác nhận qua Authenticator), kẻ tấn công chỉ có mật khẩu mà không thể đăng nhập vì thiếu mã MFA (mã OTP hết hạn sau 30-60 giây).
+* **Phishing truyền thống (Credential Harvesting):** Kẻ tấn công tạo một trang web tĩnh giả mạo giao diện để lừa nạn nhân nhập username và password
+  => Khi hệ thống bật MFA (mã OTP hoặc xác nhận qua Authenticator), kẻ tấn công chỉ có mật khẩu mà không thể đăng nhập vì thiếu mã MFA (mã OTP hết hạn sau 30-60 giây).
 * **Tấn công AiTM (Adversary-in-the-Middle) qua Reverse Proxy:**
   - Kẻ tấn công **không cần tự xây dựng trang web đăng nhập giả**. Thay vào đó, máy chủ Reverse Proxy (sử dụng **Evilginx2**) hoạt động như một lớp màng lọc trung gian hoàn toàn trong suốt.
   - Nạn nhân tương tác với hệ thống thật qua proxy: đọc email, chuyển tiếp request, nhập OTP, duyệt thông báo xác thực như bình thường.
-  - **Mục tiêu tối thượng là Đánh cắp Phiên (Session Theft):** Khi người dùng hoàn tất bước xác thực MFA với máy chủ thật, máy chủ thật sẽ cấp phát **Session Cookie** (ví dụ: `ESTSAUTH`, `ESTSAUTHPERSISTENT` của Microsoft). Reverse Proxy bắt trọn gói tin chứa Session Cookie này, cho phép kẻ tấn công nạp cookie vào trình duyệt và chiếm quyền điều khiển tài khoản vĩnh viễn cho đến khi cookie hết hạn, vượt qua 100% rào cản MFA.
+  - **Mục tiêu là Session Theft:** Khi người dùng hoàn tất bước xác thực MFA với máy chủ thật, máy chủ thật sẽ cấp phát **Session Cookie** (ví dụ: `ESTSAUTH`, `ESTSAUTHPERSISTENT` của Microsoft). Reverse Proxy bắt trọn gói tin chứa Session Cookie này, cho phép kẻ tấn công nạp cookie vào trình duyệt và chiếm quyền điều khiển tài khoản vĩnh viễn cho đến khi cookie die => bypass MFA.
 
 ---
 
-## 📌 2. Kịch Bản Tấn Công Chi Tiết (Scenario: Công Ty MMQ)
+## 📌 2. Attack Script | Scenario: Công Ty MMQ
 
-* **Đối tượng mục tiêu (Victim):** Nhân viên Lan Hiếu (`Lan.hieu@mmq.khanh`) thuộc Công ty Cổ phần MMQ.
+* **Victim:** Nhân viên Lan Hiếu (`Lan.hieu@mmq.khanh`) thuộc Công ty Cổ phần MMQ.
 * **Hình thức tiếp cận:** Gửi Email mạo danh Bộ phận Quản trị CNTT (IT Department) thông báo *"Mật khẩu tài khoản Office365/Email của bạn đã hết hạn trong 24 giờ tới. Vui lòng bấm vào liên kết để gia hạn mật khẩu"*.
 * **Đường dẫn bẫy:** Trỏ về tên miền được proxy qua Evilginx: `mail.mmq.khanh` (hoặc subdomain public).
 * **Quá trình thực thi:**
@@ -81,7 +82,7 @@ Project_IAO_MFA_bypass_by_reverse_proxy/
 
 ---
 
-## 👥 4. Phân Công Nhiệm Vụ Thành Viên (Task Assignment)
+## 👥 4. Task Assignment
 
 | Thành viên | Nhiệm vụ chính | Chi tiết công việc cần hoàn thành |
 | :--- | :--- | :--- |
@@ -90,28 +91,28 @@ Project_IAO_MFA_bypass_by_reverse_proxy/
 
 ---
 
-## 📅 5. Kế Hoạch & Tiến Độ Thực Hiện (Sprint: 19/10/2026 ➔ 30/10/2026)
+## 📅 5. Detail Plan | 19/10/2026 ➔ 30/10/2026
 
 ### Những việc đã hoàn tất (Tính đến ngày 13/10/2026):
-- [x] Thiết lập script tự động hóa môi trường chuẩn Kali Linux [`build_environment.sh`](build_environment.sh).
+- [x] script tự động hóa môi trường -> Kali Linux => [`build_environment.sh`](build_environment.sh).
 - [x] Xây dựng và nghiệm thu 100% bộ 3 thử thách CTF thực hành độc lập (`challenges/`).
-- [x] Xây dựng phòng lab DNS nội bộ (`Dns_lab/`) với `dnsmasq` và giao diện Microsoft SSO chuẩn Fluent Design.
-- [x] Tổ chức và phân loại bộ công cụ sạch tại `Tools/` (loại bỏ hoàn toàn các thư mục thừa như `rea`).
+- [x] Xây dựng phòng lab DNS nội bộ (`Dns_lab/`) với `dnsmasq` và giao diện Microsoft SSO demo. 
+- [x] Tổ chức và phân loại bộ công cụ tại `Tools/` .
 
 ### Kế hoạch cần thực hiện trước ngày 30/10/2026:
-* **Giai đoạn 1 (19/10 - 22/10): Hoàn thiện hạ tầng DNS công khai (Lương An & Khanh phụ trách)**
+* **Giai đoạn 1 (19/10 - 22/10): Hoàn thiện hạ tầng DNS công khai (Lương An + Khanh phụ trách)**
   - Đăng ký subdomain qua FreeDomain (`.dpdns.org`).
   - Cấu hình Nameserver delegation trỏ về Public IP.
   - Mở cổng 53 UDP trên router hoặc đưa lên VPS Cloud để nhận DNS query toàn cầu.
-* **Giai đoạn 2 (23/10 - 26/10): Phát triển & Tinh chỉnh Phishlet (Quang & Hiếu phụ trách)**
+* **Giai đoạn 2 (23/10 - 26/10): Phát triển & Tinh chỉnh Phishlet (Quang + Hiếu phụ trách)**
   - Hoàn thiện file cấu hình Phishlet cho công ty MMQ (`mmq_mail.yaml`).
   - Tích hợp vào Evilginx2 và xin cấp phát chứng chỉ SSL Let's Encrypt tự động.
 * **Giai đoạn 3 (27/10 - 29/10): Kiểm thử tích hợp tổng thể (End-to-End Testing)**
   - Đóng vai nạn nhân truy cập liên kết qua Internet.
-  - Xác nhận bắt thành công Session Cookie trên Evilginx2 SQLite database.
-  - Sử dụng công cụ Cookie-Editor nạp Session Cookie vào trình duyệt và xác minh quyền truy cập tài khoản không cần MFA.
-* **Giai đoạn 4 (30/10): Báo cáo tổng kết & Đóng băng dự án**
-  - Hoàn thiện báo cáo chuyên đề, slide trình bày và video demo thực nghiệm.
+  - Xác nhận bắt thành công Session Cookie trên Evilginx2 
+  - Sử dụng công cụ Cookie-Editor để nạp Session Cookie vào trình duyệt và xác minh quyền truy cập tài khoản không cần MFA.
+* **Giai đoạn 4 (30/10): Báo cáo tổng kết**
+  - Hoàn thiện báo cáo Project, presentation slides và video demo.
 
 ---
 
