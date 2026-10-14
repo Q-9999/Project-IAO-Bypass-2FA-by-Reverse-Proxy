@@ -2,7 +2,7 @@
 ## ĐỀ TÀI: NGHIÊN CỨU & MÔ PHỎNG KỸ THUẬT VƯỢT QUA XÁC THỰC ĐA YẾU TỐ (MFA BYPASS BY REVERSE PROXY - AiTM)
 
 > **Người đánh giá:** Giảng viên / Chuyên gia Cố vấn An toàn Thông tin  
-> **Nhóm thực hiện:** Lương An, Khanh, Hiếu  
+> **Nhóm thực hiện:** Lương An, Khanh, Hiếu, Quang  
 > **Giai đoạn Sprint chính:** 19/10/2026 – 30/10/2026  
 > **Đối tượng mô phỏng:** Hệ thống Email Công ty Cổ phần MMQ (`mail.mmq.khanh` / `Lan.hieu@mmq.khanh`)  
 
@@ -47,8 +47,8 @@ Nhóm đã xác định rất chính xác:
 * **Bản chất là Chiếm đoạt Phiên (Session Theft):** Khi người dùng hoàn thành bước MFA cuối cùng, IdP sinh ra Session Cookie. Cookie này chính là "chìa khóa vạn năng". Kẻ tấn công cướp chìa khóa này là vào được hệ thống, bỏ qua mọi rào cản MFA phía sau.
 
 ### 2.2. Điểm mạnh trong phân công nhân sự
-* **Lương An (DNS & Hosting):** Đây là "xương sống" của cuộc tấn công. AiTM không thể chạy nếu không có DNS điều hướng và chứng chỉ SSL hợp lệ.
-* **Khanh & Hiếu (Phishlet & Proxy Engine):** Đảm nhiệm phần "bộ não" của kịch bản, chịu trách nhiệm bóc tách dữ liệu JSON/HTTP Headers và tóm đúng cookie `ESTSAUTH`.
+* **Lương An & Khanh (DNS & Hosting):** Đây là "xương sống" của cuộc tấn công. AiTM không thể chạy nếu không có DNS điều hướng và chứng chỉ SSL hợp lệ.
+* **Quang & Hiếu (Phishlet & Proxy Engine):** Đảm nhiệm phần "bộ não" của kịch bản, chịu trách nhiệm bóc tách dữ liệu JSON/HTTP Headers và tóm đúng cookie `ESTSAUTH`.
 
 ---
 
@@ -70,7 +70,7 @@ Dưới góc nhìn một người hướng dẫn học thuật và đánh giá b
 
 ### ⚠️ Rủi ro 3: Bắt trượt Cookie do Microsoft cập nhật cấu trúc xác thực
 * **Vấn đề:** Microsoft Entra ID (Azure AD) định kỳ thay đổi định dạng token hoặc chuyển sang luồng xác thực FIDO2/Passkey.
-* **Phương án cải tiến cho Khanh & Hiếu:**
+* **Phương án cải tiến cho Quang & Hiếu:**
   - Phishlet phải cấu hình bắt đủ 3 cookies tối thiểu: `ESTSAUTH`, `ESTSAUTHPERSISTENT`, `SignInStateCookie`.
   - Luôn mở file log debug của Evilginx (`log/` hoặc console) trong quá trình nạn nhân thao tác để đảm bảo regex không bị lỗi thời.
 
@@ -92,8 +92,8 @@ Một đồ án an toàn thông tin xuất sắc không chỉ dừng lại ở v
 ## 5. LỘ TRÌNH CHI TIẾT TỪ 19/10 ĐẾN 30/10/2026 (ACTION PLAN)
 
 ```text
-19/10 ─── 22/10: Lương An triển khai DNS công khai & NS Delegation (FreeDomain)
-23/10 ─── 26/10: Khanh & Hiếu hoàn thiện kịch bản Phishlet cho mail.mmq.khanh
+19/10 ─── 22/10: Lương An & Khanh triển khai DNS công khai & NS Delegation (FreeDomain)
+23/10 ─── 26/10: Quang & Hiếu hoàn thiện kịch bản Phishlet cho mail.mmq.khanh
 27/10 ─── 29/10: Chạy thử nghiệm End-to-End, cướp Cookie & nạp lại trình duyệt
 30/10          : Đóng gói báo cáo hoàn chỉnh, video demo và slide bảo vệ
 ```

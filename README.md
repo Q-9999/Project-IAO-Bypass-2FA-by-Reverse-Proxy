@@ -2,7 +2,7 @@
 
 > **Môn học / Chuyên đề:** An Toàn Thông Tin & Phòng Thủ Hệ Thống  
 > **Thời gian thực hiện (Sprint chính):** 19/10/2026 ➔ 30/10/2026  
-> **Nhóm thực hiện:** Lương An, Khanh, Hiếu  
+> **Nhóm thực hiện:** Lương An, Khanh, Hiếu, Quang  
 
 ---
 
@@ -85,8 +85,8 @@ Project_IAO_MFA_bypass_by_reverse_proxy/
 
 | Thành viên | Nhiệm vụ chính | Chi tiết công việc cần hoàn thành |
 | :--- | :--- | :--- |
-| **Lương An** | **DNS Server & Web Hosting** | • Triển khai máy chủ DNS nội bộ (`Dns_lab`) phục vụ kiểm thử.<br>• Thiết lập hệ thống DNS công khai qua **FreeDomain** (`.dpdns.org`).<br>• Cấu hình bản ghi NS (Nameserver Delegation) trỏ về IP công khai của máy chủ để phục vụ Evilginx cấp chứng chỉ SSL Let's Encrypt. |
-| **Khanh & Hiếu** | **Phishlet Script & Tinh chỉnh Proxy** | • Nghiên cứu cấu trúc Phishlet YAML của Microsoft 365 / Outlook.<br>• Tùy biến kịch bản Phishlet cho mục tiêu `mail.mmq.khanh`.<br>• Bắt đúng các Cookie cốt lõi (`ESTSAUTH`, `ESTSAUTHPERSISTENT`, `SignInStateCookie`).<br>• Kiểm thử luồng bắt cookie tự động và chuyển hướng nạn nhân sau khi hoàn tất. |
+| **Lương An & Khanh** | **DNS Server & Web Hosting** | • Triển khai và quản trị máy chủ DNS nội bộ (`Dns_lab`).<br>• Thiết lập hệ thống DNS công khai qua **FreeDomain** (`.dpdns.org`).<br>• Cấu hình bản ghi NS (Nameserver Delegation) trỏ về IP công khai của máy chủ để phục vụ Evilginx cấp chứng chỉ SSL Let's Encrypt.<br>• Phụ trách mở cổng mạng (Port Forwarding 53/80/443) hoặc triển khai VPS Cloud. |
+| **Quang & Hiếu** | **Phishlet Script & Tinh chỉnh Proxy** | • Nghiên cứu cấu trúc Phishlet YAML của Microsoft 365 / Outlook.<br>• Tùy biến kịch bản Phishlet cho mục tiêu `mail.mmq.khanh`.<br>• Cấu hình bóc tách dữ liệu và bắt chuẩn xác các Cookie cốt lõi (`ESTSAUTH`, `ESTSAUTHPERSISTENT`, `SignInStateCookie`).<br>• Kiểm thử luồng bắt cookie tự động và chuyển hướng nạn nhân sau khi hoàn tất. |
 
 ---
 
@@ -99,11 +99,11 @@ Project_IAO_MFA_bypass_by_reverse_proxy/
 - [x] Tổ chức và phân loại bộ công cụ sạch tại `Tools/` (loại bỏ hoàn toàn các thư mục thừa như `rea`).
 
 ### Kế hoạch cần thực hiện trước ngày 30/10/2026:
-* **Giai đoạn 1 (19/10 - 22/10): Hoàn thiện hạ tầng DNS công khai (Lương An phụ trách)**
+* **Giai đoạn 1 (19/10 - 22/10): Hoàn thiện hạ tầng DNS công khai (Lương An & Khanh phụ trách)**
   - Đăng ký subdomain qua FreeDomain (`.dpdns.org`).
   - Cấu hình Nameserver delegation trỏ về Public IP.
   - Mở cổng 53 UDP trên router hoặc đưa lên VPS Cloud để nhận DNS query toàn cầu.
-* **Giai đoạn 2 (23/10 - 26/10): Phát triển & Tinh chỉnh Phishlet (Khanh & Hiếu phụ trách)**
+* **Giai đoạn 2 (23/10 - 26/10): Phát triển & Tinh chỉnh Phishlet (Quang & Hiếu phụ trách)**
   - Hoàn thiện file cấu hình Phishlet cho công ty MMQ (`mmq_mail.yaml`).
   - Tích hợp vào Evilginx2 và xin cấp phát chứng chỉ SSL Let's Encrypt tự động.
 * **Giai đoạn 3 (27/10 - 29/10): Kiểm thử tích hợp tổng thể (End-to-End Testing)**
