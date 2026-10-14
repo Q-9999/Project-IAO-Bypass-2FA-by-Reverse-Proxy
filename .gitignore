@@ -1,0 +1,22 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+
+# Evilginx dynamic runtime directories
+Tools/Evilginx2/build/redirectors/
+
+# Preserve necessary challenge logs
+*.log
+!challenges/**/distfiles/*.log

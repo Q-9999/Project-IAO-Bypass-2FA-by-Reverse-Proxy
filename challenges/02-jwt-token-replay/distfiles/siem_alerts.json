@@ -1,0 +1,24 @@
+[
+  {
+    "timestamp": "2026-10-12T09:15:32Z",
+    "event_id": "SEC-4011",
+    "alert_name": "High Risk Sign-In via Unmanaged Proxy",
+    "user_principal": "lan.hieu@mmq.khanh",
+    "ip_address": "104.28.19.42",
+    "geo_location": "Frankfurt, Germany",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0",
+    "risk_level": "Medium",
+    "details": "User authenticated successfully with password and MFA (TOTP). Sign-in originated from suspected hosting IP."
+  },
+  {
+    "timestamp": "2026-10-12T09:35:10Z",
+    "event_id": "SEC-4099",
+    "alert_name": "Impossible Travel & Refresh Token Replay",
+    "user_principal": "lan.hieu@mmq.khanh",
+    "ip_address": "194.26.29.112",
+    "geo_location": "Moscow, Russia",
+    "user_agent": "Go-http-client/1.1",
+    "risk_level": "High",
+    "details": "Refresh token RT_MMQ_REFRESH_9381024_AITM_STOLEN issued to 104.28.19.42 was replayed to request elevated scope: Vault.Admin.Export."
+  }
+]
