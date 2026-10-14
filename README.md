@@ -1,4 +1,4 @@
-# Dự Án IAO202: MFA Bypass bằng Reverse Proxy - AiTM
+# Dự Án IAO202: Bypass MFA bằng Reverse Proxy - AiTM
 
 > **Chuyên ngành:** An Toàn Thông Tin 
 > **Project Timeline:** 19/10/2026 ➔ 30/10/2026  
