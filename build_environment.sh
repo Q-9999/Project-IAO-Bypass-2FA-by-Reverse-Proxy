@@ -73,6 +73,10 @@ echo -e "  [+] Node.js: $NODE_VER"
 echo -e "  [+] npm:     $NPM_VER"
 
 if [ -d "$PROJECT_DIR/IAO_Web_Test" ]; then
+    if [ ! -f "$PROJECT_DIR/IAO_Web_Test/.env" ] && [ -f "$PROJECT_DIR/IAO_Web_Test/.env.example" ]; then
+        echo -e "[*] Tự động khởi tạo .env từ cấu hình mẫu..."
+        cp "$PROJECT_DIR/IAO_Web_Test/.env.example" "$PROJECT_DIR/IAO_Web_Test/.env"
+    fi
     echo -e "[*] Đang chạy kiểm thử tự động (Smoke Test) cho IAO_Web_Test..."
     (cd "$PROJECT_DIR/IAO_Web_Test" && npm test >/dev/null 2>&1) && echo -e "  [+] IAO_Web_Test Authentication & OTP: ${GREEN}[PASS 100%]${NC}" || echo -e "  [+] IAO_Web_Test: ${YELLOW}[FAIL] Vui lòng kiểm tra lại cấu hình .env${NC}"
 fi
@@ -80,7 +84,7 @@ fi
 # 5. Check Script Permissions
 echo ""
 echo -e "[*] Bước 5: Cấp quyền thực thi (chmod +x) cho các script..."
-chmod +x "$PROJECT_DIR"/build_environment.sh 2>/dev/null || true
+chmod +x "$PROJECT_DIR"/build_environment.sh "$PROJECT_DIR"/start_app.sh 2>/dev/null || true
 echo -e "${GREEN}[OK] Quyền thực thi sẵn sàng.${NC}"
 
 echo ""

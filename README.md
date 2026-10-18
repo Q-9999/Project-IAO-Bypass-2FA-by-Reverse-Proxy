@@ -150,6 +150,7 @@ Project_IAO_MFA_bypass_by_reverse_proxy/
 ├── README.md                                      # Tài liệu tổng quan, lộ trình & phân công nhiệm vụ
 ├── LICENSE                                        # Giấy phép mã nguồn mở MIT & Tuyên bố học thuật
 ├── build_environment.sh                           # Script tự động kiểm tra & cài đặt môi trường
+├── start_app.sh                                   # Script 1-click khởi động nhanh ứng dụng Web MFA
 │
 ├── Tools/                                         # BỘ CÔNG CỤ REVERSE PROXY
 │   ├── README.md                                  # Hướng dẫn & tài liệu vai trò của Evilginx2
