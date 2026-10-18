@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body>
+<header class="top"><a class="brand" href="/"><span class="mark"></span><span class="app-name">Northgate</span></a>
+<button class="btn ghost small" id="logout" type="button" style="width:auto;padding:0 16px">Logout</button></header>
+<main class="shell"><div class="hero" id="content" hidden>
+<p class="hello">Welcome back!</p>
+<h1 class="email" id="email"></h1>
+<p class="who" id="who"></p>
+<p class="stamp">Signed in <b><time id="login-time"></time></b></p>
+<section class="info" aria-labelledby="acct"><h2 id="acct">Account information</h2>
+<dl><div><dt>Username</dt><dd id="i-username"></dd></div><div><dt>Email</dt><dd id="i-email"></dd></div>
+<div><dt>Member since</dt><dd id="i-since"></dd></div><div><dt>Session expires</dt><dd id="i-expires"></dd></div></dl></section>
+</div></main>
+<script src="/assets/app.js"></script><script src="/assets/dashboard.js"></script>
+</body></html>

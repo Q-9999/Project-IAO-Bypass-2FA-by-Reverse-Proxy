@@ -64,28 +64,27 @@ else
     echo -e "${GREEN}[OK] Biên dịch Evilginx2 thành công!${NC}"
 fi
 
-# 4. Verify Python Environment & CTF Solvers
+# 4. Verify Node.js Environment & IAO_Web_Test
 echo ""
-echo -e "[*] Bước 4: Kiểm tra Python & Thư viện Scapy..."
-python3 -c "import scapy; print('  [+] Scapy version:', scapy.__version__)"
-echo -e "${GREEN}[OK] Python3 và Scapy hoạt động chuẩn xác.${NC}"
+echo -e "[*] Bước 4: Kiểm tra môi trường Node.js & Ứng dụng Web MFA (IAO_Web_Test)..."
+NODE_VER=$(node -v 2>/dev/null || echo "not installed")
+NPM_VER=$(npm -v 2>/dev/null || echo "not installed")
+echo -e "  [+] Node.js: $NODE_VER"
+echo -e "  [+] npm:     $NPM_VER"
+
+if [ -d "$PROJECT_DIR/IAO_Web_Test" ]; then
+    echo -e "[*] Đang chạy kiểm thử tự động (Smoke Test) cho IAO_Web_Test..."
+    (cd "$PROJECT_DIR/IAO_Web_Test" && npm test >/dev/null 2>&1) && echo -e "  [+] IAO_Web_Test Authentication & OTP: ${GREEN}[PASS 100%]${NC}" || echo -e "  [+] IAO_Web_Test: ${YELLOW}[FAIL] Vui lòng kiểm tra lại cấu hình .env${NC}"
+fi
 
 # 5. Check Script Permissions
 echo ""
-echo -e "[*] Bước 5: Cấp quyền thực thi (chmod +x) cho toàn bộ script lab..."
-chmod +x "$PROJECT_DIR"/Dns_lab/*.sh 2>/dev/null || true
+echo -e "[*] Bước 5: Cấp quyền thực thi (chmod +x) cho các script..."
 chmod +x "$PROJECT_DIR"/build_environment.sh 2>/dev/null || true
-echo -e "${GREEN}[OK] Quyền thực thi các script trong Dns_lab đã sẵn sàng.${NC}"
-
-# 6. Test Solvers
-echo ""
-echo -e "[*] Bước 6: Kiểm tra tính toàn vẹn của bộ 3 thử thách CTF..."
-python3 "$PROJECT_DIR/challenges/01-mfa-traffic-analysis/solve.py" >/dev/null 2>&1 && echo -e "  [+] Challenge 1 (HTTP AiTM):     ${GREEN}[PASS 100%]${NC}"
-python3 "$PROJECT_DIR/challenges/02-jwt-token-replay/solve.py" >/dev/null 2>&1 && echo -e "  [+] Challenge 2 (OAuth2 Replay): ${GREEN}[PASS 100%]${NC}"
-python3 "$PROJECT_DIR/challenges/03-tls-aitm-decryption/solve.py" >/dev/null 2>&1 && echo -e "  [+] Challenge 3 (TLS Decrypt):   ${GREEN}[PASS 100%]${NC}"
+echo -e "${GREEN}[OK] Quyền thực thi sẵn sàng.${NC}"
 
 echo ""
 echo -e "${GREEN}==================================================================${NC}"
 echo -e "${GREEN}  HOÀN TẤT THIẾT LẬP MÔI TRƯỜNG DỰ ÁN IAO THÀNH CÔNG!${NC}"
-echo -e "${GREEN}  Hệ thống tương thích 100% với máy ảo của bạn.${NC}"
+echo -e "${GREEN}  Hệ thống tương thích 100% với môi trường local.${NC}"
 echo -e "${GREEN}==================================================================${NC}"

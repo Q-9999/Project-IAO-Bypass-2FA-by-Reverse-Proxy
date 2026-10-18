@@ -14,6 +14,10 @@ Thumbs.db
 # Temporary files
 *.tmp
 
+# Node.js dependencies
+node_modules/
+IAO_Web_Test/node_modules/
+
 # Evilginx dynamic runtime directories
 Tools/Evilginx2/build/redirectors/
 

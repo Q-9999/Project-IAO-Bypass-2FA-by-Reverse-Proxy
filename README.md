@@ -151,25 +151,19 @@ Project_IAO_MFA_bypass_by_reverse_proxy/
 ├── LICENSE                                        # Giấy phép mã nguồn mở MIT & Tuyên bố học thuật
 ├── build_environment.sh                           # Script tự động kiểm tra & cài đặt môi trường
 │
-├── Tools/                                         # THƯ MỤC CÔNG CỤ TẤN CÔNG & TÊN MIỀN
-│   ├── README.md                                  # Giải thích vai trò của Evilginx2 & Freedomain
+├── Tools/                                         # BỘ CÔNG CỤ REVERSE PROXY
+│   ├── README.md                                  # Hướng dẫn & tài liệu vai trò của Evilginx2
 │   ├── Evilginx2/                                 # Mã nguồn & file thực thi Reverse Proxy (build/evilginx)
-│   ├── Freedomain/                                # Tài liệu & cơ chế ủy quyền DNS (DigitalPlat .dpdns.org)
-│   └── Phishlets/                                 # Thư viện kịch bản Phishlet (mmq_o365.yaml, Microsoft...)
+│   └── Phishlets/                                 # Thư viện phishlet mẫu chuẩn
 │
-├── Dns_lab/                                       # PHÒNG LAB THỰC NGHIỆM NỘI BỘ (DRY RUN)
-│   ├── README.md                                  # Hướng dẫn chi tiết chạy thử nghiệm nội bộ
-│   ├── dnsmasq.conf                               # Cấu hình DNS Server nội bộ (cổng 5353)
-│   ├── start_dns.sh                               # Khởi động DNS Server (chế độ debug trực quan)
-│   ├── stop_dns.sh                                # Dừng an toàn DNS Server
-│   ├── test_dns.sh                                # Script tự động kiểm tra phân giải DNS
-│   ├── start_web.sh                               # Khởi động Web Server cổng 80
-│   └── index.html                                 # Giao diện Microsoft SSO chuẩn Fluent Design (có MFA)
-│
-└── challenges/                                    # BỘ BÀI TẬP CTF FORENSICS (3 CẤP ĐỘ)
-    ├── 01-mfa-traffic-analysis/                   # Level 1 (250 pts): Điều tra lưu lượng AiTM HTTP
-    ├── 02-jwt-token-replay/                       # Level 2 (350 pts): OAuth2 Refresh Token Replay
-    └── 03-tls-aitm-decryption/                    # Level 3 (500 pts): Giải mã gói tin TLS 1.3 với SSL Keylog
+└── IAO_Web_Test/                                  # ỨNG DỤNG WEB MỤC TIÊU CÓ XÁC THỰC MFA (NORTHGATE)
+    ├── README.md                                  # Tài liệu hướng dẫn & giải thích cơ chế Email-OTP
+    ├── package.json                               # Cấu hình dự án Node.js/Express & dependencies
+    ├── .env                                       # Thiết lập biến môi trường (PORT, SESSION_SECRET, SMTP)
+    ├── src/                                       # Mã nguồn Backend (server, router, db giả lập, otp, sessions)
+    ├── public/                                    # Giao diện Frontend (login, register, forgot, dashboard)
+    ├── test/                                      # Kịch bản kiểm thử tự động e2e (smoke.js)
+    └── data/                                      # Cơ sở dữ liệu lưu trữ người dùng & phiên (app.db)
 ```
 
 ---

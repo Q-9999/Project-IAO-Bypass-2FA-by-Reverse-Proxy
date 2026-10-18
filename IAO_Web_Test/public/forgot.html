@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reset password</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body><main class="shell">
+<a class="brand" href="/"><span class="mark"></span><span class="app-name">Northgate</span></a>
+<section class="card">
+<h1>Reset your password</h1><p class="sub">We’ll email a code to the address on your account.</p>
+<div id="msg" class="alert" role="alert" aria-live="polite" hidden></div>
+<form id="forgot-form" novalidate>
+<div class="field"><label for="email">Email address</label><div class="input-row"><input type="email" id="email" name="email" autocomplete="email" required><button type="button" id="send-code" class="btn ghost small">Send verification code</button></div></div>
+<div class="field"><label for="code">Verification code</label><input class="code" type="text" id="code" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" required></div>
+<div class="field"><label for="password">New password</label><div class="input-row"><input type="password" id="password" name="password" autocomplete="new-password" required><button type="button" class="btn ghost small" data-toggle-pw="password" aria-pressed="false" style="width:72px">Show</button></div></div>
+<div class="field"><label for="confirmPassword">Confirm new password</label><div class="input-row"><input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required><button type="button" class="btn ghost small" data-toggle-pw="confirmPassword" aria-pressed="false" style="width:72px">Show</button></div></div>
+<button class="btn full" id="reset-btn" type="submit">Update password</button>
+<p class="foot"><a href="/login">Back to log in</a></p>
+</form></section>
+</main>
+<script src="/assets/app.js"></script>
+<script src="/assets/forgot.js"></script>
+</body></html>

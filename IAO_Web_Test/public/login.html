@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Log in</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body><main class="shell">
+<a class="brand" href="/"><span class="mark"></span><span class="app-name">Northgate</span></a>
+<section class="card">
+<div id="msg" class="alert" role="alert" aria-live="polite" hidden></div>
+<form id="login-form" novalidate>
+<h1>Welcome back</h1><p class="sub">Log in to your account.</p>
+<div class="field"><label for="identifier">Email or username</label><input type="text" id="identifier" name="identifier" autocomplete="username" autocapitalize="none" required></div>
+<div class="field"><label for="password">Password</label><div class="input-row"><input type="password" id="password" name="password" autocomplete="current-password" required><button type="button" class="btn ghost small" data-toggle-pw="password" aria-pressed="false" style="width:72px">Show</button></div></div>
+<div class="row"><label class="check"><input type="checkbox" name="remember"> Remember me</label><a href="/forgot">Forgot password?</a></div>
+<button class="btn full" id="login-btn" type="submit">Login</button>
+<p class="foot">New here? <a href="/register">Create an account</a></p>
+</form>
+<form id="otp-form" novalidate hidden>
+<h1>Check your email</h1><p class="sub">Enter the 6-digit code we sent to <b id="sent-to"></b>. It expires in 5 minutes.</p>
+<div class="field"><label for="code">Verification code</label><input class="code" type="text" id="code" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" required></div>
+<button class="btn full" id="verify-btn" type="submit">Verify and continue</button>
+<div class="row" style="margin:16px 0 0;justify-content:center"><button class="btn ghost small" id="resend" type="button" style="width:auto;padding:0 14px">Resend code</button><button class="btn ghost small" id="back" type="button" style="width:auto;padding:0 14px;border-color:transparent">Use a different account</button></div>
+</form>
+</section>
+</main>
+<script src="/assets/app.js"></script>
+<script src="/assets/login.js"></script>
+</body></html>
