@@ -19,25 +19,38 @@ echo -e "${CYAN}================================================================
 echo ""
 
 # 1. Check Required System Commands
-echo -e "[*] Bước 1: Kiểm tra các công cụ hệ thống (System Tools)..."
-REQUIRED_COMMANDS=(go dnsmasq dig python3 tshark wireshark git make curl)
-MISSING_COMMANDS=()
+echo -e "[*] Bước 1: Kiểm tra các công cụ hệ thống bắt buộc (Core Dependencies)..."
+CORE_COMMANDS=(go node npm git make curl python3)
+MISSING_CORE=()
 
-for cmd in "${REQUIRED_COMMANDS[@]}"; do
+for cmd in "${CORE_COMMANDS[@]}"; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
-        MISSING_COMMANDS+=("$cmd")
+        MISSING_CORE+=("$cmd")
     else
         echo -e "  [+] $cmd: ${GREEN}TÌM THẤY ($(command -v "$cmd"))${NC}"
     fi
 done
 
-if [ ${#MISSING_COMMANDS[@]} -gt 0 ]; then
-    echo -e "${YELLOW}[!] Phát hiện thiếu các lệnh: ${MISSING_COMMANDS[*]}${NC}"
-    echo -e "[*] Vui lòng chạy lệnh: sudo apt-get update && sudo apt-get install -y ${MISSING_COMMANDS[*]}"
+if [ ${#MISSING_CORE[@]} -gt 0 ]; then
+    echo -e "${RED}[!] Phát hiện thiếu các công cụ cốt lõi: ${MISSING_CORE[*]}${NC}"
+    echo -e "[*] Vui lòng cài đặt bổ sung trước khi tiếp tục:"
+    echo -e "      sudo apt-get update && sudo apt-get install -y ${MISSING_CORE[*]}"
     exit 1
 else
-    echo -e "${GREEN}[OK] Toàn bộ các công cụ hệ thống cần thiết đã sẵn sàng!${NC}"
+    echo -e "${GREEN}[OK] Toàn bộ công cụ cốt lõi đã sẵn sàng!${NC}"
 fi
+
+# Optional Network & Analysis Tools
+echo ""
+echo -e "[*] Kiểm tra các công cụ phân tích mạng bổ trợ (Optional Diagnostic Tools)..."
+OPTIONAL_COMMANDS=(dnsmasq dig tshark wireshark)
+for cmd in "${OPTIONAL_COMMANDS[@]}"; do
+    if command -v "$cmd" >/dev/null 2>&1; then
+        echo -e "  [+] $cmd: ${GREEN}SẴN SÀNG${NC}"
+    else
+        echo -e "  [-] $cmd: ${YELLOW}CHƯA CÀI ĐẶT (Có thể cài qua: sudo apt-get install -y $cmd)${NC}"
+    fi
+done
 
 # 2. Verify Go Environment
 echo ""
@@ -77,6 +90,12 @@ if [ -d "$PROJECT_DIR/IAO_Web_Test" ]; then
         echo -e "[*] Tự động khởi tạo .env từ cấu hình mẫu..."
         cp "$PROJECT_DIR/IAO_Web_Test/.env.example" "$PROJECT_DIR/IAO_Web_Test/.env"
     fi
+
+    if [ ! -d "$PROJECT_DIR/IAO_Web_Test/node_modules" ]; then
+        echo -e "[*] Chưa có node_modules, đang tự động cài đặt dependencies..."
+        (cd "$PROJECT_DIR/IAO_Web_Test" && npm install --silent)
+    fi
+
     echo -e "[*] Đang chạy kiểm thử tự động (Smoke Test) cho IAO_Web_Test..."
     (cd "$PROJECT_DIR/IAO_Web_Test" && npm test >/dev/null 2>&1) && echo -e "  [+] IAO_Web_Test Authentication & OTP: ${GREEN}[PASS 100%]${NC}" || echo -e "  [+] IAO_Web_Test: ${YELLOW}[FAIL] Vui lòng kiểm tra lại cấu hình .env${NC}"
 fi

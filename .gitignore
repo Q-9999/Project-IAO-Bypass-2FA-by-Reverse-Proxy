@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# OS & Editor
+# OS & Editor files
 .DS_Store
 Thumbs.db
 .vscode/
@@ -11,16 +11,29 @@ Thumbs.db
 *.swp
 *.swo
 
-# Temporary files
+# Temporary & Log files
 *.tmp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Secrets & Environment variables
+.env
+*.env
+!.env.example
+IAO_Web_Test/.env
+
+# Local Databases (SQLite)
+*.db
+*.sqlite
+*.sqlite3
+IAO_Web_Test/data/*.db
 
 # Node.js dependencies
 node_modules/
 IAO_Web_Test/node_modules/
 
-# Evilginx dynamic runtime directories
+# Evilginx build output & runtime
+Tools/Evilginx2/build/evilginx
 Tools/Evilginx2/build/redirectors/
-
-# Preserve necessary challenge logs
-*.log
-!challenges/**/distfiles/*.log

@@ -1,5 +1,3 @@
 release/
 build/
 private/
-/phishlets
-!/phishlets/example.yaml
