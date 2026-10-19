@@ -316,7 +316,6 @@ This helps confirm the app logic is working without needing a real email provide
 
 ```bash
 npm install
-copy .env.example .env
 # edit .env with your secret and SMTP settings
 npm start
 ```
